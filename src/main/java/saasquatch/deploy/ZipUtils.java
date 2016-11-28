@@ -9,7 +9,7 @@ public class ZipUtils {
 	
 	public static void extractToSameDir(String zipName) {
 		File originalZipFile = new File(zipName);
-		System.out.println("Unzipping " + originalZipFile.getAbsolutePath());
+		System.out.println("Unzipping " + originalZipFile.getAbsolutePath() + " ...");
 		try {
 			ZipFile zipFile = new ZipFile(originalZipFile);
 			zipFile.extractAll(originalZipFile.getParentFile().getAbsolutePath());

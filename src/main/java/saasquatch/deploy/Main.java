@@ -12,6 +12,7 @@ public class Main {
 		Configuration config = new ConfigGetter(args).getConfiguration();
 		new SbtRunner(config).dist();
 		ZipUtils.extractToSameDir(config.getString(Constants.Keys.TARGET_ZIP_PATH));
+		new AssetsCopier(config).copy();
 		
 		System.out.println("Done!");
 		Instant endTime = Instant.now();
