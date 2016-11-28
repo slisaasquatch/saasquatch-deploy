@@ -18,11 +18,9 @@ import org.eclipse.jgit.revwalk.RevWalk;
 
 public class JgitUtils {
 	
-	private final Configuration config;
 	private Git git = null;
 
 	public JgitUtils(Configuration config) {
-		this.config = config;
 		try {
 			git = Git.open(new File(config.getString(Constants.Keys.PROJECT_GIT_DIR)));
 		} catch (IOException e) {
@@ -30,8 +28,17 @@ public class JgitUtils {
 		}
 	}
 	
-	public RevCommit getLatestCommitInCurrentBranch() {
-		return getLatestCommitInBranch(AppEnvironment.getCurrent(config).getBranchName(config));
+	public String getLatestCommitShortName() {
+		return getLatestCommitName().substring(0, 7);
+	}
+	
+	public String getLatestCommitName() {
+		try {
+			return git.getRepository().findRef(org.eclipse.jgit.lib.Constants.HEAD).getObjectId().name();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	public RevCommit getLatestCommitInBranch(String branchName) {

@@ -1,8 +1,6 @@
 package saasquatch.deploy;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import org.apache.commons.configuration2.Configuration;
 
@@ -32,16 +30,9 @@ public class SquatchZip {
 	}
 	
 	public String getNewZipName() {
-//		RevCommit latestCommit = new JgitUtils(config).getLatestCommitInCurrentBranch();
-//		String shortSha1 = JgitUtils.getShortSha1FromRevCommit(latestCommit);
-//		String newZipName = "saasquatch-"
-//				+ AppEnvironment.getCurrent(config).toString().toLowerCase()
-//				+ "-" + shortSha1;
-//		return newZipName;
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-		return "saasquatch-"
-				+ AppEnvironment.getCurrent(config).toString().toLowerCase()
-				+ "-" + sdf.format(new Date()) + ".zip";
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+//		return "saasquatch-" + sdf.format(new Date()) + ".zip";
+		return "saasquatch-" + new JgitUtils(config).getLatestCommitShortName() + ".zip";
 	}
 	
 	public static void extractToSameDir(String zipName) {

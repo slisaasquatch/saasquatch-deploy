@@ -20,5 +20,13 @@ public class Constants {
 				TARGET_PROJECT_ASSETS_DIR = "target.project.assets.dir";
 		
 	}
+	
+	public static class EnvKeys {
+		
+		public static final String
+				WEB_AWS_ACCESS_KEY = "WEB_AWS_ACCESS_KEY",
+				WEB_AWS_SECRET = "WEB_AWS_SECRET";
+		
+	}
 
 }
