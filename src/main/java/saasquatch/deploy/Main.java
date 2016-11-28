@@ -15,12 +15,13 @@ public class Main {
 		new SbtRunner(config).dist();
 		
 		// Extract saasquatch zip
-		ZipUtils.extractToSameDir(config.getString(Constants.Keys.TARGET_ZIP_PATH));
+		new SquatchZip(config).extractOriginalZip();
 		
 		// Copy over app/assets directory
 		new AssetsCopier(config).copy();
 		
 		// Re-zip
+		new SquatchZip(config).compressNewZip();
 		
 		// Upload to S3
 		
