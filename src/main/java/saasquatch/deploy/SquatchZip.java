@@ -27,8 +27,8 @@ public class SquatchZip {
 		extractToSameDir(originalZipName);
 	}
 	
-	public void compressNewZip() {
-		createZipFromDir(targetProjectDir, getNewZipName());
+	public File compressNewZip() {
+		return createZipFromDir(targetProjectDir, getNewZipName());
 	}
 	
 	public String getNewZipName() {
@@ -56,12 +56,13 @@ public class SquatchZip {
 		System.out.println("Done unzipping!");
 	}
 	
-	public static void createZipFromDir(String dir, String zipName) {
+	public static File createZipFromDir(String dir, String zipName) {
 		File dirFile = new File(dir);
-		if (!dirFile.isDirectory()) return;
+		if (!dirFile.isDirectory()) return null;
 		System.out.println("Creating new zip: " + zipName);
+		ZipFile zipFile = null;
 		try {
-			ZipFile zipFile = new ZipFile(dirFile.getParentFile().getAbsolutePath()
+			zipFile = new ZipFile(dirFile.getParentFile().getAbsolutePath()
 					+ File.separator + zipName);
 			ZipParameters params = new ZipParameters();
 			params.setCompressionMethod(Zip4jConstants.COMP_DEFLATE);
@@ -71,6 +72,7 @@ public class SquatchZip {
 			e.printStackTrace();
 		}
 		System.out.println("Done creating zip!");
+		return zipFile.getFile();
 	}
 	
 }

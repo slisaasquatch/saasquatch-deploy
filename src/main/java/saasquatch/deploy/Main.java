@@ -1,5 +1,6 @@
 package saasquatch.deploy;
 
+import java.io.File;
 import java.time.Duration;
 import java.time.Instant;
 
@@ -21,7 +22,7 @@ public class Main {
 		new AssetsCopier(config).copy();
 		
 		// Re-zip
-		new SquatchZip(config).compressNewZip();
+		File newZip = new SquatchZip(config).compressNewZip();
 		
 		// Upload to S3
 		
