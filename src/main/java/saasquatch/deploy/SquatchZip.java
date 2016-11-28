@@ -15,10 +15,12 @@ public class SquatchZip {
 	
 	private final Configuration config;
 	private final String originalZipName;
+	private final String targetProjectDir;
 	
 	public SquatchZip(Configuration config) {
 		this.config = config;
 		this.originalZipName = config.getString(Constants.Keys.TARGET_ZIP_PATH);
+		this.targetProjectDir = config.getString(Constants.Keys.TARGET_PROJECT_DIR);
 	}
 	
 	public void extractOriginalZip() {
@@ -26,7 +28,7 @@ public class SquatchZip {
 	}
 	
 	public void compressNewZip() {
-		createZipFromDir(config.getString(Constants.Keys.TARGET_PROJECT_DIR), getNewZipName());
+		createZipFromDir(targetProjectDir, getNewZipName());
 	}
 	
 	public String getNewZipName() {
