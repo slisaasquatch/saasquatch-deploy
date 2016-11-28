@@ -2,20 +2,19 @@ package saasquatch.deploy;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Properties;
+
+import org.apache.commons.configuration2.Configuration;
 
 public class SbtRunner {
 	
 	private static final Runtime RUNTIME = Runtime.getRuntime();
 	
-	private final Properties prop;
 	private final File appDir;
 	private final String sbtExecutable;
 
-	public SbtRunner(Properties prop) {
-		this.prop = prop;
-		this.appDir = new File(this.prop.getProperty(Constants.Keys.APP_DIR));
-		this.sbtExecutable = this.prop.getProperty(Constants.Keys.SBT_EXEC_PATH);
+	public SbtRunner(Configuration config) {
+		this.appDir = new File(config.getString(Constants.Keys.APP_DIR));
+		this.sbtExecutable = config.getString(Constants.Keys.SBT_EXEC_PATH);
 	}
 	
 	public void dist() {
