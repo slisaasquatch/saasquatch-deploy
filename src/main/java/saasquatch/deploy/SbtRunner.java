@@ -13,7 +13,7 @@ public class SbtRunner {
 	private final String sbtExecutable;
 
 	public SbtRunner(Configuration config) {
-		this.appDir = new File(config.getString(Constants.Keys.APP_DIR));
+		this.appDir = new File(config.getString(Constants.Keys.PROJECT_DIR));
 		this.sbtExecutable = config.getString(Constants.Keys.SBT_EXEC_PATH);
 	}
 	
