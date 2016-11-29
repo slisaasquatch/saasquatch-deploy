@@ -49,7 +49,6 @@ public class S3Uploader {
 		long contentLength = file.length();
 		long partSize = 5 * 1024 * 1024;
 
-        System.out.println("Uploaded " + 0 + "/" + contentLength);
 		try {
 			// Step 2: Upload parts.
 			long filePosition = 0;
