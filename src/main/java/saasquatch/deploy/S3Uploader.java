@@ -32,8 +32,6 @@ public class S3Uploader {
 	public void upload(File file) {
 		String keyName = AppEnvironment.getCurrent(config).toString().toLowerCase()
 				+ "/" + file.getName();
-		System.out.println(keyName);
-		System.out.println(bucketName);
 		upload(file, bucketName, keyName);
 	}
 	
