@@ -8,6 +8,7 @@ public class Constants {
 		
 		public static final String
 				SBT_EXEC_PATH = "sbt.exec.path",
+				SBT_PRINT_OUTPUT = "sbt.print.output",
 				APP_ENVIRONMENT = "app.environment",
 				PROJECT_DIR = "project.dir",
 				PROJECT_GIT_DIR = "project.git.dir",
