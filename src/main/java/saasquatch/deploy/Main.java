@@ -29,7 +29,7 @@ public class Main {
 		
 		// Cleanup
 		
-		System.out.println("Done!");
+		System.out.println("\nDone!");
 		Instant endTime = Instant.now();
 		System.out.println("Elapsed time: "
 				+ Duration.between(startTime, endTime).getSeconds() + " seconds");

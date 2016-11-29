@@ -23,7 +23,7 @@ public class ConfigFactory {
 		if (this.args.length == 0) {
 			this.propName = Constants.DEFAULT_PROP_NAME;
 		} else {
-			this.propName = args[0];
+			this.propName = this.args[0];
 		}
 		
 	}

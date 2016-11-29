@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.apache.commons.configuration2.Configuration;
 
-import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
@@ -25,7 +24,7 @@ public class S3Uploader {
 
 	public S3Uploader(Configuration config) {
 		this.config = config;
-		this.s3Client = new AmazonS3Client(getAWSCredentials());
+		this.s3Client = new AmazonS3Client(getBasicAWSCredentials());
 		this.bucketName = config.getString(Constants.Keys.S3_BUCKET_NAME);
 	}
 	
@@ -69,7 +68,7 @@ public class S3Uploader {
 		        // Upload part and add response to our list.
 		        partETags.add(s3Client.uploadPart(uploadRequest).getPartETag());
 		        filePosition += partSize;
-		        System.out.println("Uploaded " + filePosition + "/" + contentLength);
+		        System.out.print("Uploaded " + filePosition + "/" + contentLength + " bytes\r");
 			}
 	        
 			// Step 3: Complete.
@@ -85,9 +84,17 @@ public class S3Uploader {
 		System.out.println("Done uploading!");
 	}
 	
-	private static AWSCredentials getAWSCredentials() {
+	private static BasicAWSCredentials getBasicAWSCredentials() {
 		String key = System.getenv(Constants.EnvKeys.WEB_AWS_ACCESS_KEY);
+		if (key == null) {
+			throw new RuntimeException("The environment variable "
+					+ Constants.EnvKeys.WEB_AWS_ACCESS_KEY + " is not set.");
+		}
 		String secret = System.getenv(Constants.EnvKeys.WEB_AWS_SECRET);
+		if (secret == null) {
+			throw new RuntimeException("The environment variable "
+					+ Constants.EnvKeys.WEB_AWS_SECRET + " is not set.");
+		}
 		return new BasicAWSCredentials(key, secret);
 	}
 

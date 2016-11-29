@@ -1,5 +1,8 @@
 package saasquatch.deploy;
 
+import static org.eclipse.jgit.lib.Constants.HEAD;
+import static org.eclipse.jgit.lib.Constants.R_HEADS;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,7 +37,7 @@ public class JgitUtils {
 	
 	public String getLatestCommitName() {
 		try {
-			return git.getRepository().findRef(org.eclipse.jgit.lib.Constants.HEAD).getObjectId().name();
+			return git.getRepository().findRef(HEAD).getObjectId().name();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -81,7 +84,7 @@ public class JgitUtils {
 							e.printStackTrace();
 						}
 						for (Map.Entry<String, Ref> e : repo.getAllRefs().entrySet()) {
-			                if (e.getKey().startsWith(org.eclipse.jgit.lib.Constants.R_HEADS)) {
+			                if (e.getKey().startsWith(R_HEADS)) {
 			                    try {
 									if (walk.isMergedInto(targetCommit, walk.parseCommit(
 									        e.getValue().getObjectId()))) {
