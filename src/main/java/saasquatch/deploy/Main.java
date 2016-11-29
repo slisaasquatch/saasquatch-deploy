@@ -10,16 +10,16 @@ public class Main {
 	
 	public static void main(String[] args) {
 		Instant startTime = Instant.now();
-		Configuration config = new ConfigGetter(args).getConfiguration();
+		Configuration config = new ConfigFactory(args).getConfiguration();
 		
 		// Run sbt dist
-//		new SbtRunner(config).dist();
+		new SbtRunner(config).dist();
 		
 		// Extract saasquatch zip
-//		new SquatchZip(config).extractOriginalZip();
+		new SquatchZip(config).extractOriginalZip();
 		
 		// Copy over app/assets directory
-//		new AssetsCopier(config).copy();
+		new AssetsCopier(config).copy();
 		
 		// Re-zip
 		File newZip = new SquatchZip(config).compressNewZip();

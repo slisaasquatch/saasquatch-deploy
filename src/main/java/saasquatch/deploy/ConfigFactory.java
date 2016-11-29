@@ -12,12 +12,12 @@ import org.apache.commons.configuration2.builder.FileBasedConfigurationBuilder;
 import org.apache.commons.configuration2.builder.fluent.Parameters;
 import org.apache.commons.configuration2.ex.ConfigurationException;
 
-public class ConfigGetter {
+public class ConfigFactory {
 	
 	private final String[] args;
 	private final String propName;
 	
-	public ConfigGetter(String[] args) {
+	public ConfigFactory(String[] args) {
 		this.args = args.clone();
 		
 		if (this.args.length == 0) {
