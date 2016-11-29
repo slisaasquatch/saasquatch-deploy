@@ -25,6 +25,9 @@ public class DeployCleanup {
 				e.printStackTrace();
 			}
 			System.out.println("Done cleanup!");
+		} else {
+			System.out.println(Constants.Keys.TARGET_DIR_CLEANUP
+					+ " is set to false. Skipping cleanup.");
 		}
 	}
 
