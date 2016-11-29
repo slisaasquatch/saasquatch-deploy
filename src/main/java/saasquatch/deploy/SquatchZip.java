@@ -50,11 +50,15 @@ public class SquatchZip {
 	public static File createZipFromDir(String dir, String zipName) {
 		File dirFile = new File(dir);
 		if (!dirFile.isDirectory()) return null;
-		System.out.println("Creating new zip: " + zipName);
+		System.out.println("Creating new zip: " + zipName + " ...");
 		ZipFile zipFile = null;
 		try {
 			zipFile = new ZipFile(dirFile.getParentFile().getAbsolutePath()
 					+ File.separator + zipName);
+			File underlyingFile = zipFile.getFile();
+			if (underlyingFile.exists()) {
+				underlyingFile.delete();
+			}
 			ZipParameters params = new ZipParameters();
 			params.setCompressionMethod(Zip4jConstants.COMP_DEFLATE);
 			params.setCompressionLevel(Zip4jConstants.DEFLATE_LEVEL_ULTRA);

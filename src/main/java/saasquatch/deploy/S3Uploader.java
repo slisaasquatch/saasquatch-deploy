@@ -19,10 +19,22 @@ import com.amazonaws.services.s3.model.UploadPartRequest;
 
 public class S3Uploader {
 	
+	private final Configuration config;
 	private final AmazonS3 s3Client;
+	private final String bucketName;
 
 	public S3Uploader(Configuration config) {
+		this.config = config;
 		this.s3Client = new AmazonS3Client(getAWSCredentials());
+		this.bucketName = config.getString(Constants.Keys.S3_BUCKET_NAME);
+	}
+	
+	public void upload(File file) {
+		String keyName = AppEnvironment.getCurrent(config).toString().toLowerCase()
+				+ "/" + file.getName();
+		System.out.println(keyName);
+		System.out.println(bucketName);
+		upload(file, bucketName, keyName);
 	}
 	
 	public void upload(File file, String existingBucketName, String keyName) {

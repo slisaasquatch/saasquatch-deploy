@@ -25,7 +25,7 @@ public class Main {
 		File newZip = new SquatchZip(config).compressNewZip();
 		
 		// Upload to S3
-		new S3Uploader(config).upload(newZip, "appstackresources_east", newZip.getName());
+		new S3Uploader(config).upload(newZip);
 		
 		// Cleanup
 		

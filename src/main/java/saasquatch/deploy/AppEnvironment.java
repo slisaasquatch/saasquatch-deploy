@@ -4,20 +4,10 @@ import org.apache.commons.configuration2.Configuration;
 
 public enum AppEnvironment {
 	
-	PRODUCTION {
-		@Override
-		public String getBranchName(Configuration config) {
-			return config.getString(Constants.Keys.PRODUCTION_BRANCH);
-		}
-	},
-	STAGING {
-		@Override
-		public String getBranchName(Configuration config) {
-			return config.getString(Constants.Keys.STAGING_BRANCH);
-		}
-	};
+	PRODUCTION,
+	STAGING;
 	
-	public abstract String getBranchName(Configuration config);
+//	public abstract String getBranchName(Configuration config);
 	
 	@Override
 	public String toString() {
