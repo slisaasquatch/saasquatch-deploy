@@ -53,13 +53,11 @@ public class SquatchZip {
 		System.out.println("Creating new zip: " + zipName + " ...");
 		ZipFile zipFile = null;
 		try {
-			zipFile = new ZipFile(dirFile.getParentFile().getAbsolutePath()
-					+ File.separator + zipName);
-			File underlyingFile = zipFile.getFile();
-			if (underlyingFile.exists()) {
-				System.out.println("File: " + underlyingFile.getName()
+			zipFile = new ZipFile(new File(dirFile.getParentFile(), zipName));
+			if (zipFile.getFile().exists()) {
+				System.out.println("File: " + zipFile.getFile().getName()
 						+ " already exists. It will be overwritten.");
-				underlyingFile.delete();
+				zipFile.getFile().delete();
 			}
 			ZipParameters params = new ZipParameters();
 			params.setCompressionMethod(Zip4jConstants.COMP_DEFLATE);
