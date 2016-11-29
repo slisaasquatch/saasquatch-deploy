@@ -13,9 +13,9 @@ public class AssetsCopier {
 	
 	public AssetsCopier(Configuration config) {
 		this.originalAssetsDir = new File(config.getString(
-				Constants.Keys.PROJECT_ASSETS_DIR));
+				Constants.Config.PROJECT_ASSETS_DIR));
 		this.targetAssetsDir = new File(config.getString(
-				Constants.Keys.TARGET_PROJECT_ASSETS_DIR));
+				Constants.Config.TARGET_PROJECT_ASSETS_DIR));
 	}
 	
 	public void copy() {

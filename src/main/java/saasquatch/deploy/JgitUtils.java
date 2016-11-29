@@ -25,7 +25,7 @@ public class JgitUtils {
 
 	public JgitUtils(Configuration config) {
 		try {
-			git = Git.open(new File(config.getString(Constants.Keys.PROJECT_GIT_DIR)));
+			git = Git.open(new File(config.getString(Constants.Config.PROJECT_GIT_DIR)));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

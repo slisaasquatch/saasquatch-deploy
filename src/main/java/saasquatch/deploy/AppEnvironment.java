@@ -29,7 +29,7 @@ public enum AppEnvironment {
 	}
 	
 	public static AppEnvironment getCurrent(Configuration config) {
-		return fromString(config.getString(Constants.Keys.APP_ENVIRONMENT));
+		return fromString(config.getString(Constants.Config.APP_ENVIRONMENT));
 	}
 
 }

@@ -17,8 +17,8 @@ public class SquatchZip {
 	
 	public SquatchZip(Configuration config) {
 		this.config = config;
-		this.originalZipName = config.getString(Constants.Keys.TARGET_ZIP_PATH);
-		this.targetProjectDirName = config.getString(Constants.Keys.TARGET_PROJECT_DIR);
+		this.originalZipName = config.getString(Constants.Config.TARGET_ZIP_PATH);
+		this.targetProjectDirName = config.getString(Constants.Config.TARGET_PROJECT_DIR);
 	}
 	
 	public void extractOriginalZip() {

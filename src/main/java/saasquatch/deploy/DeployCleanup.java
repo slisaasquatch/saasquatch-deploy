@@ -12,8 +12,8 @@ public class DeployCleanup {
 	private final File targetDir;
 	
 	public DeployCleanup(Configuration config) {
-		this.cleanup = config.getBoolean(Constants.Keys.TARGET_DIR_CLEANUP);
-		this.targetDir = new File(config.getString(Constants.Keys.TARGET_DIR));
+		this.cleanup = config.getBoolean(Constants.Config.TARGET_DIR_CLEANUP);
+		this.targetDir = new File(config.getString(Constants.Config.TARGET_DIR));
 	}
 	
 	public void doCleanup() {
@@ -26,7 +26,7 @@ public class DeployCleanup {
 			}
 			System.out.println("Done cleanup!");
 		} else {
-			System.out.println(Constants.Keys.TARGET_DIR_CLEANUP
+			System.out.println(Constants.Config.TARGET_DIR_CLEANUP
 					+ " is set to false. Skipping cleanup.");
 		}
 	}

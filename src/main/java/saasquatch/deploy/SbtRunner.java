@@ -16,9 +16,9 @@ public class SbtRunner {
 	private final String sbtExecutable;
 
 	public SbtRunner(Configuration config) {
-		this.printOutput = config.getBoolean(Constants.Keys.SBT_PRINT_OUTPUT);
-		this.projectDir = new File(config.getString(Constants.Keys.PROJECT_DIR));
-		this.sbtExecutable = config.getString(Constants.Keys.SBT_EXEC_PATH);
+		this.printOutput = config.getBoolean(Constants.Config.SBT_PRINT_OUTPUT);
+		this.projectDir = new File(config.getString(Constants.Config.PROJECT_DIR));
+		this.sbtExecutable = config.getString(Constants.Config.SBT_EXEC_PATH);
 	}
 	
 	public void dist() {

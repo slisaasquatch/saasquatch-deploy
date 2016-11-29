@@ -4,7 +4,7 @@ public class Constants {
 	
 	public static final String DEFAULT_PROP_NAME = "config.properties";
 	
-	public static class Keys {
+	public static class Config {
 		
 		public static final String
 				SBT_EXEC_PATH = "sbt.exec.path",

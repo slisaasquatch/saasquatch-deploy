@@ -26,9 +26,9 @@ public class S3Uploader {
 
 	public S3Uploader(Configuration config) {
 		this.config = config;
-		this.doUpload = config.getBoolean(Constants.Keys.S3_DO_UPLOAD);
+		this.doUpload = config.getBoolean(Constants.Config.S3_DO_UPLOAD);
 		this.s3Client = new AmazonS3Client(getBasicAWSCredentials());
-		this.bucketName = config.getString(Constants.Keys.S3_BUCKET_NAME);
+		this.bucketName = config.getString(Constants.Config.S3_BUCKET_NAME);
 	}
 	
 	public void upload(File file) {
@@ -37,7 +37,7 @@ public class S3Uploader {
 					+ "/" + file.getName();
 			upload(file, bucketName, keyName);
 		} else {
-			System.out.println(Constants.Keys.S3_DO_UPLOAD
+			System.out.println(Constants.Config.S3_DO_UPLOAD
 					+ " is set to false. Skipping upload.");
 		}
 	}
