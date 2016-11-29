@@ -28,6 +28,7 @@ public class Main {
 		new S3Uploader(config).upload(newZip);
 		
 		// Cleanup
+		new DeployCleanup(config).doCleanup();
 		
 		System.out.println("\nDone!");
 		Instant endTime = Instant.now();

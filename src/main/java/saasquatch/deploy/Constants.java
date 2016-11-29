@@ -16,6 +16,7 @@ public class Constants {
 				TARGET_ZIP_PATH = "target.zip.path",
 				TARGET_PROJECT_DIR = "target.project.dir",
 				TARGET_PROJECT_ASSETS_DIR = "target.project.assets.dir",
+				TARGET_DIR_CLEANUP = "target.dir.cleanup",
 				S3_BUCKET_NAME = "s3.bucket.name";
 		
 	}
