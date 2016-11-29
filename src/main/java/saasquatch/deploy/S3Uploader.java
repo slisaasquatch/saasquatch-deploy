@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.configuration2.Configuration;
+import org.apache.commons.lang3.StringUtils;
 
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
@@ -67,7 +68,10 @@ public class S3Uploader {
 		        // Upload part and add response to our list.
 		        partETags.add(s3Client.uploadPart(uploadRequest).getPartETag());
 		        filePosition += partSize;
-		        System.out.print("Uploaded " + filePosition + "/" + contentLength + " bytes\r");
+		        System.out.print("Uploaded "
+		        		+ StringUtils.leftPad(String.valueOf(filePosition),
+		        				String.valueOf(contentLength).length())
+		        		+ "/" + contentLength + " bytes\r");
 			}
 	        
 			// Step 3: Complete.
