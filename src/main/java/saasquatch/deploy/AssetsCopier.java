@@ -8,18 +8,20 @@ import org.apache.commons.io.FileUtils;
 
 public class AssetsCopier {
 	
-	private final String originalAssetsDir;
-	private final String targetAssetsDir;
+	private final File originalAssetsDir;
+	private final File targetAssetsDir;
 	
 	public AssetsCopier(Configuration config) {
-		this.originalAssetsDir = config.getString(Constants.Keys.PROJECT_ASSETS_DIR);
-		this.targetAssetsDir = config.getString(Constants.Keys.TARGET_PROJECT_ASSETS_DIR);
+		this.originalAssetsDir = new File(config.getString(
+				Constants.Keys.PROJECT_ASSETS_DIR));
+		this.targetAssetsDir = new File(config.getString(
+				Constants.Keys.TARGET_PROJECT_ASSETS_DIR));
 	}
 	
 	public void copy() {
 		System.out.println("Copying assets directory...");
 		try {
-			FileUtils.copyDirectory(new File(originalAssetsDir), new File(targetAssetsDir));
+			FileUtils.copyDirectory(originalAssetsDir, targetAssetsDir);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

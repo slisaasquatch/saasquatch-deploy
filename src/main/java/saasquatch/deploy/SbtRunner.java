@@ -11,12 +11,12 @@ public class SbtRunner {
 	
 	private static final Runtime RUNTIME = Runtime.getRuntime();
 	
-	private final String printOutput;
+	private final boolean printOutput;
 	private final File projectDir;
 	private final String sbtExecutable;
 
 	public SbtRunner(Configuration config) {
-		this.printOutput = config.getString(Constants.Keys.SBT_PRINT_OUTPUT);
+		this.printOutput = config.getBoolean(Constants.Keys.SBT_PRINT_OUTPUT);
 		this.projectDir = new File(config.getString(Constants.Keys.PROJECT_DIR));
 		this.sbtExecutable = config.getString(Constants.Keys.SBT_EXEC_PATH);
 	}
@@ -25,7 +25,7 @@ public class SbtRunner {
 		System.out.println("Running sbt dist...");
 		try {
 			Process p = RUNTIME.exec(new String[] {sbtExecutable, "dist"}, null, projectDir);
-			if (Boolean.parseBoolean(printOutput)) {
+			if (printOutput) {
 				CompletableFuture.runAsync(() -> {
 					try (Scanner scanner = new Scanner(p.getInputStream())) {
 						while (scanner.hasNextLine()) {

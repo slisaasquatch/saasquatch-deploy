@@ -8,19 +8,19 @@ import org.apache.commons.io.FileUtils;
 
 public class DeployCleanup {
 	
-	private final String cleanup;
-	private final String targetDir;
+	private final boolean cleanup;
+	private final File targetDir;
 	
 	public DeployCleanup(Configuration config) {
-		this.cleanup = config.getString(Constants.Keys.TARGET_DIR_CLEANUP);
-		this.targetDir = config.getString(Constants.Keys.TARGET_DIR);
+		this.cleanup = config.getBoolean(Constants.Keys.TARGET_DIR_CLEANUP);
+		this.targetDir = new File(config.getString(Constants.Keys.TARGET_DIR));
 	}
 	
 	public void doCleanup() {
-		if (Boolean.parseBoolean(cleanup.trim().toLowerCase())) {
+		if (cleanup) {
 			System.out.println("Starting cleanup...");
 			try {
-				FileUtils.deleteDirectory(new File(targetDir));
+				FileUtils.deleteDirectory(targetDir);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
