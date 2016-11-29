@@ -26,7 +26,7 @@ public class SbtRunner {
 		} catch (IOException | InterruptedException e) {
 			e.printStackTrace();
 		}
-		System.out.println("Done sbt dist!");
+		System.out.println("Done running sbt dist!");
 	}
 
 }

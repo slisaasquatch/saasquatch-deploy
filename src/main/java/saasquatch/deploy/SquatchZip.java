@@ -57,6 +57,8 @@ public class SquatchZip {
 					+ File.separator + zipName);
 			File underlyingFile = zipFile.getFile();
 			if (underlyingFile.exists()) {
+				System.out.println("File: " + underlyingFile.getName()
+						+ " already exists. It will be overwritten.");
 				underlyingFile.delete();
 			}
 			ZipParameters params = new ZipParameters();

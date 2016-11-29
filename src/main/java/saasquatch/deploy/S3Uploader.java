@@ -36,8 +36,12 @@ public class S3Uploader {
 	}
 	
 	public void upload(File file, String existingBucketName, String keyName) {
+		System.out.println("Start uploading " + file.getName() + " ...");
+		// Create a list of UploadPartResponse objects. You get one of these
+		// for each part upload.
 		List<PartETag> partETags = new ArrayList<PartETag>();
 		
+		// Step 1: Initialize.
 		InitiateMultipartUploadRequest initRequest = new InitiateMultipartUploadRequest(
 				existingBucketName, keyName);
 		InitiateMultipartUploadResult initResponse =
@@ -45,7 +49,10 @@ public class S3Uploader {
 		
 		long contentLength = file.length();
 		long partSize = 5 * 1024 * 1024;
+
+        System.out.println("Uploaded " + 0 + "/" + contentLength);
 		try {
+			// Step 2: Upload parts.
 			long filePosition = 0;
 			for (int i = 1; filePosition < contentLength; i++) {
 		        // Last part can be less than 5 MB. Adjust part size.
@@ -59,19 +66,23 @@ public class S3Uploader {
 						.withFile(file)
 						.withPartSize(partSize);
 		        
+		        // Upload part and add response to our list.
 		        partETags.add(s3Client.uploadPart(uploadRequest).getPartETag());
 		        filePosition += partSize;
-		        
-		        CompleteMultipartUploadRequest compRequest =
-		        		new CompleteMultipartUploadRequest(existingBucketName,
-		        				keyName, initResponse.getUploadId(), partETags);
-		        
-		        s3Client.completeMultipartUpload(compRequest);
+		        System.out.println("Uploaded " + filePosition + "/" + contentLength);
 			}
+	        
+			// Step 3: Complete.
+	        CompleteMultipartUploadRequest compRequest =
+	        		new CompleteMultipartUploadRequest(existingBucketName,
+	        				keyName, initResponse.getUploadId(), partETags);
+	        
+	        s3Client.completeMultipartUpload(compRequest);
 		} catch (Exception e) {
 			s3Client.abortMultipartUpload(new AbortMultipartUploadRequest(
 					existingBucketName, keyName, initResponse.getUploadId()));
 		}
+		System.out.println("Done uploading!");
 	}
 	
 	private static AWSCredentials getAWSCredentials() {
