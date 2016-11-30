@@ -2,6 +2,7 @@ package saasquatch.deploy;
 
 import static org.eclipse.jgit.lib.Constants.HEAD;
 import static org.eclipse.jgit.lib.Constants.R_HEADS;
+import static saasquatch.deploy.Main.err;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,21 +14,49 @@ import java.util.Map;
 import org.apache.commons.configuration2.Configuration;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.errors.NoWorkTreeException;
 import org.eclipse.jgit.errors.RevisionSyntaxException;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
 
-public class JgitUtils {
+public class SquatchGit {
 	
-	private Git git = null;
+	private final Git git;
+	private final boolean allowUncommittedChanges;
 
-	public JgitUtils(Configuration config) {
+	public SquatchGit(Configuration config) {
 		try {
 			git = Git.open(new File(config.getString(Constants.Config.PROJECT_GIT_DIR)));
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+		this.allowUncommittedChanges = config.getBoolean(
+				Constants.Config.ALLOW_UNCOMMITTED_CHANGES);
+	}
+	
+	public Git getGit() {
+		return git;
+	}
+	
+	public void checkUncommittedChanges() {
+		if (allowUncommittedChanges) {
+			System.out.println(Constants.Config.ALLOW_UNCOMMITTED_CHANGES
+					+ " is set to true. Ignoring uncommitted changes if there are any.");
+		} else {
+			System.out.println("Checking uncommitted changes...");
+			boolean ok = false;
+			try {
+				ok = !git.status().call().hasUncommittedChanges();
+			} catch (NoWorkTreeException | GitAPIException e) {
+				e.printStackTrace();
+			}
+			if (ok) {
+				System.out.println("Done! No uncommitted changes found.");
+			} else {
+				err("There are uncommitted changes in the repository. Deployment aborted.");
+			}
 		}
 	}
 	

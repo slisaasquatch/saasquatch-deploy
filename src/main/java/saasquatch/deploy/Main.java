@@ -8,9 +8,16 @@ import org.apache.commons.configuration2.Configuration;
 
 public class Main {
 	
-	public static void main(String[] args) {
+	public static void err(String msg) {
+		System.err.println(msg);
+		System.exit(-1);
+	}
+	
+	public static void main(String[] args) throws Exception {
 		Instant startTime = Instant.now();
 		Configuration config = new ConfigFactory(args).getConfiguration();
+		
+		new SquatchGit(config).checkUncommittedChanges();
 		
 		// Run sbt dist
 		new SbtRunner(config).dist();

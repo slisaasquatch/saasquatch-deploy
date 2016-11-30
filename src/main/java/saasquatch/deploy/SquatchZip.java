@@ -32,7 +32,7 @@ public class SquatchZip {
 	public String getNewZipName() {
 //		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 //		return "saasquatch-" + sdf.format(new Date()) + ".zip";
-		return "saasquatch-" + new JgitUtils(config).getLatestCommitShortName() + ".zip";
+		return "saasquatch-" + new SquatchGit(config).getLatestCommitShortName() + ".zip";
 	}
 	
 	public static void extractToSameDir(String zipName) {

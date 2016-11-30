@@ -10,6 +10,7 @@ public class Constants {
 				SBT_EXEC_PATH = "sbt.exec.path",
 				SBT_PRINT_OUTPUT = "sbt.print.output",
 				APP_ENVIRONMENT = "app.environment",
+				ALLOW_UNCOMMITTED_CHANGES = "allow.uncommitted.changes",
 				PROJECT_DIR = "project.dir",
 				PROJECT_GIT_DIR = "project.git.dir",
 				PROJECT_ASSETS_DIR = "project.assets.dir",
